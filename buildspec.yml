@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+  variables:
+    DOTNET_CORE_RUNTIME: 6.0
+phases:
+  install:
+    runtime-versions:
+      dotnet: ${DOTNET_CORE_RUNTIME}
+    commands: 
+      - dotnet tool install --global dotnet-ef
+  pre_build:
+    commands:
+      - echo Restore Started at `date`
+      - dotnet restore
+      - aws ecr get-login-password | docker login --username AWS --password-stdin $ACCOUNT
+
+  build:
+    commands:
+      - cd GatewaysTest.Api
+      - echo Build Started at `date`
+      - dotnet build -c Release
+      - dotnet publish -c Release -r linux-x64 -o ./bin/Release/net5.0/publish --self-contained false
+      - docker build -t $REPOSITORY:latest .
+      - docker tag $REPOSITORY:latest $ACCOUNT/$REPOSITORY:latest
+      - |
+        if [ "$UPDATE_MODEL" = "true" ] ; then
+          dotnet ef database update;
+        fi
+
+  post_build:
+    commands:
+      - echo Publish Started at `date`
+      - docker push $ACCOUNT/$REPOSITORY:latest
+      - IMAGE_NAME=`docker images --filter="dangling=false" --format "{{.Repository}}@{{.Digest}}" $ACCOUNT/$REPOSITORY`
+      - echo $IMAGE_NAME
+      - aws lambda update-function-code --function-name=$FUNCTION --image-uri=$IMAGE_NAME
+      
