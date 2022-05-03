@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Common\Language\I18n.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>I18n.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Common\Language\I18n.Es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>I18n.Es.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Common\Language\I18n.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>I18n.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Common\Language\I18n.Es.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>I18n.Es.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>

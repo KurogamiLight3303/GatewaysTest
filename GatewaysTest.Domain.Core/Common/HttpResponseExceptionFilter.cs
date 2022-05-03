@@ -1,0 +1,40 @@
+﻿using FluentValidation;
+using GatewaysTest.Domain.Common.Language;
+using GatewaysTest.Domain.Common.Model;
+using GatewaysTest.Infrastructure.Extesions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
+
+namespace GatewaysTest.Domain.Core.Common;
+
+public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
+{
+    private readonly ILogger _logger;
+
+    public HttpResponseExceptionFilter(ILogger logger)
+    {
+        _logger = logger;
+    }
+
+    public int Order => int.MaxValue - 10;
+
+    public void OnActionExecuting(ActionExecutingContext context) { }
+
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+        if (context.Exception is ValidationException exception)
+        {
+            context.Result = new ObjectResult
+                (new OperationResultValue(false, exception.Errors.FirstOrDefault()?.ErrorMessage 
+                                                 ?? I18n.UnknowError));
+            context.ExceptionHandled = true;
+        }
+        else if (context.Exception != null)
+        {
+            _logger.LogError(context.Exception.ToMessageAndCompleteStacktrace());
+            context.Result = new ObjectResult(new OperationResultValue(false, I18n.UnknowError));
+            context.ExceptionHandled = true;
+        }
+    }
+}

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="InvalidIpAddress" xml:space="preserve">
+        <value>Invalid Ip Address</value>
+    </data>
+    <data name="InvalidName" xml:space="preserve">
+        <value>Invalid Name</value>
+    </data>
+    <data name="InvalidSerialNo" xml:space="preserve">
+        <value>Invalid Serial Number</value>
+    </data>
+    <data name="SerialNoAlreadyExist" xml:space="preserve">
+        <value>Serial Number already exist</value>
+    </data>
+    <data name="InvalidVendor" xml:space="preserve">
+        <value>Invalid Vendor</value>
+    </data>
+    <data name="OnlyTenPeripheralsByGateway" xml:space="preserve">
+        <value>Only 10 peripherals by each gateway are allowed</value>
+    </data>
+    <data name="InvalidUid" xml:space="preserve">
+        <value>Invalid Peripheral UID</value>
+    </data>
+    <data name="GatewayRemoved" xml:space="preserve">
+        <value>Gateway Removed</value>
+    </data>
+    <data name="UnknowError" xml:space="preserve">
+        <value>Unknow Error</value>
+    </data>
+    <data name="GatewayNotFound" xml:space="preserve">
+        <value>Gateway not foud</value>
+    </data>
+    <data name="PeripheralNotFound" xml:space="preserve">
+        <value>Peripheral not found</value>
+    </data>
+    <data name="PeripheralRemoved" xml:space="preserve">
+        <value>Peripheral Removed</value>
+    </data>
+</root>
