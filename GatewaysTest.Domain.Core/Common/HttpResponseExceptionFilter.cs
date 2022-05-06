@@ -10,11 +10,8 @@ namespace GatewaysTest.Domain.Core.Common;
 
 public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
 {
-    private readonly ILogger _logger;
-
-    public HttpResponseExceptionFilter(ILogger logger)
+    public HttpResponseExceptionFilter()
     {
-        _logger = logger;
     }
 
     public int Order => int.MaxValue - 10;
@@ -32,7 +29,7 @@ public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
         }
         else if (context.Exception != null)
         {
-            _logger.LogError(context.Exception.ToMessageAndCompleteStacktrace());
+            Console.WriteLine(context.Exception.ToMessageAndCompleteStacktrace());
             context.Result = new ObjectResult(new OperationResultValue(false, I18n.UnknowError));
             context.ExceptionHandled = true;
         }
