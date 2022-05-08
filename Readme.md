@@ -23,18 +23,18 @@ The service must also offer an operation for displaying information about all st
 devices) and an operation for displaying details for a single gateway. Finally, it must be possible to add and
 remove a device from a gateway.
 
-###Each gateway has:
+### Each gateway has:
 * a unique serial number (string),
 * human-readable name (string),
 * IPv4 address (to be validated),
 * multiple associated peripheral devices.
-###Each peripheral device has:
+### Each peripheral device has:
 * a UID (number),
 * vendor (string),
 * date created,
 * status - online/offline.
 
-##Other considerations
+## Other considerations
 Please, provide
 - Basic UI - recommended or (providing test data for Postman (or other rest client) if you do not have
   enough time.
@@ -42,15 +42,15 @@ Please, provide
 - Readme file with installation guides.
 - An automated build.
 
-#Installation
-##Database Configuration
+# Installation
+## Database Configuration
 Set the database configuration in the `appsettings.json` file at the `DomainConnectionString` key. The Database provider used is MSSQL Server.
-##Generate Database
+## Generate Database
 To initialize the database use the migrations in the `GatewaysTest.Infrastructure` project and start the update using the `GatewaysTest.Api` project.
 ```
 -dotnet ef database update -s ./GatewaysTest.Api
 ```
-##Aws Configuration
+## Aws Configuration
 
 In case of use Aws as automatic build as part of CI/CD process configure in the BuildProject to use the source code yml file and set the current variables 
 - `ACCOUNT`: The aws account
