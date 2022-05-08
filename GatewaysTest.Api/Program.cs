@@ -1,5 +1,7 @@
 using GatewaysTest.Domain.Core.Common;
+using GatewaysTest.Domain.Core.Common.CustomBinder;
 using GatewaysTest.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder
     .Services
-    .AddControllers(options => { options.Filters.Add<HttpResponseExceptionFilter>(); })
+    .AddControllers(options =>
+    {
+        options.Filters.Add<HttpResponseExceptionFilter>();
+        IHttpRequestStreamReaderFactory readerFactory = 
+            builder.Services.BuildServiceProvider().GetRequiredService<IHttpRequestStreamReaderFactory>();
+        options.ModelBinderProviders.Insert(0, new CustomModelBinderProvider(options.InputFormatters, readerFactory));
+    })
     .ConfigureApiBehaviorOptions(options =>
     {
         options.InvalidModelStateResponseFactory = GatewaysTest.Domain.Core.Common.Configuration.InvalidModelHandling;

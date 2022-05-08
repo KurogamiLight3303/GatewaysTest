@@ -3,7 +3,6 @@ using GatewaysTest.Domain.Common.Model;
 using GatewaysTest.Domain.Core.Features.Peripherals.Commands;
 using GatewaysTest.Domain.Core.Features.Peripherals.Queries;
 using GatewaysTest.Domain.Model.Gateways;
-using HybridModelBinding;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +36,7 @@ public class PeripheralController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     // ReSharper disable once RouteTemplates.MethodMissingRouteParameters
-    public Task<OperationResultValue<PeripheralResume>> Post([FromHybrid] AddPeripheralCommand command)
+    public Task<OperationResultValue<PeripheralResume>> Post(AddPeripheralCommand command)
         => _mediator.Send(command);
     /// <summary>
     /// Update Peripheral in Gateway
@@ -47,7 +46,7 @@ public class PeripheralController : ControllerBase
     // ReSharper disable once RouteTemplates.RouteParameterIsNotPassedToMethod
     [HttpPut("{Uid}")]
     // ReSharper disable once RouteTemplates.MethodMissingRouteParameters
-    public Task<OperationResultValue<PeripheralResume>> Put([FromHybrid] UpdatePeripheralCommand command)
+    public Task<OperationResultValue<PeripheralResume>> Put(UpdatePeripheralCommand command)
         => _mediator.Send(command);
     /// <summary>
     /// Remove Peripheral from Gateway

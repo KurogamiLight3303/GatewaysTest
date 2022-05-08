@@ -8,8 +8,8 @@ public class UpdateGatewayValidation : BaseGatewayValidations<UpdateGatewayComma
     public UpdateGatewayValidation()
     {
         ConfigureIpAddress()
-            .When(p => string.IsNullOrEmpty(p.IpAddress));
+            .When(p => !string.IsNullOrEmpty(p.IpAddress));
         ConfigureName()
-            .When(p => string.IsNullOrEmpty(p.Name));
+            .When(p => !string.IsNullOrEmpty(p.Name));
     }
 }

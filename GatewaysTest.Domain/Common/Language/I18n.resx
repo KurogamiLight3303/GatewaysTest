@@ -54,4 +54,7 @@
     <data name="PeripheralRemoved" xml:space="preserve">
         <value>Peripheral Removed</value>
     </data>
+    <data name="PeripheralAlreadyExits" xml:space="preserve">
+        <value>Peripheral already exist</value>
+    </data>
 </root>

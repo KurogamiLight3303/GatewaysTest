@@ -2,9 +2,7 @@ using System.Net.Mime;
 using GatewaysTest.Domain.Common.Model;
 using GatewaysTest.Domain.Core.Features.Gateways.Commands;
 using GatewaysTest.Domain.Core.Features.Gateways.Queries;
-using GatewaysTest.Domain.Core.Features.Peripherals.Commands;
 using GatewaysTest.Domain.Model.Gateways;
-using HybridModelBinding;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,7 +52,7 @@ public class GatewayController : ControllerBase
     // ReSharper disable once RouteTemplates.RouteParameterIsNotPassedToMethod
     [HttpPut("{SerialNo}")]
     // ReSharper disable once RouteTemplates.MethodMissingRouteParameters
-    public Task<OperationResultValue<GatewayResume>> Put([FromHybrid] UpdateGatewayCommand model)
+    public Task<OperationResultValue<GatewayResume>> Put(UpdateGatewayCommand model)
         => _mediator.Send(model);
     /// <summary>
     /// Remove Gateway

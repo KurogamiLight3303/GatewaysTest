@@ -1,9 +1,9 @@
-﻿using HybridModelBinding;
+﻿using GatewaysTest.Domain.Core.Common.CustomBinder;
 
 namespace GatewaysTest.Domain.Core.Features.Peripherals.Commands;
 
-[HybridBindClass(new []{Source.Body, Source.Route})]
 public class AddPeripheralCommand : PeripheralBaseAddOrUpdateCommand
 {
+    [CustomAttributeBinder]
     public int Uid { get; init; }
 }

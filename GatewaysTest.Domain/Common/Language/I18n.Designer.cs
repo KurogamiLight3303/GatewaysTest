@@ -133,6 +133,15 @@ namespace GatewaysTest.Domain.Common.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Peripheral already exist.
+        /// </summary>
+        public static string PeripheralAlreadyExits {
+            get {
+                return ResourceManager.GetString("PeripheralAlreadyExits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Peripheral not found.
         /// </summary>
         public static string PeripheralNotFound {

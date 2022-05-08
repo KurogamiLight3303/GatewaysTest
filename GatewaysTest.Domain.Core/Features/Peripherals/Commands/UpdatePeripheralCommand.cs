@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
-using HybridModelBinding;
+using GatewaysTest.Domain.Core.Common.CustomBinder;
 
 namespace GatewaysTest.Domain.Core.Features.Peripherals.Commands;
 
-[HybridBindClass(new []{Source.Body, Source.Route})]
 public class UpdatePeripheralCommand : PeripheralBaseAddOrUpdateCommand
 {
     [JsonIgnore]
     [DefaultValue("")]
-    [HybridBindProperty(Source.Route, "uid")]
+    [CustomAttributeBinder]
     public int Uid { get; set; }
 }

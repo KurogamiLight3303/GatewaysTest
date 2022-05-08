@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
 using GatewaysTest.Domain.Core.Common.Commands;
+using GatewaysTest.Domain.Core.Common.CustomBinder;
 using GatewaysTest.Domain.Model.Gateways;
-using HybridModelBinding;
 
 namespace GatewaysTest.Domain.Core.Features.Peripherals.Commands;
 
@@ -16,6 +16,6 @@ public abstract class PeripheralBaseAddOrUpdateCommand : CommandBase<PeripheralR
     public bool Status { get; init; }
     [JsonIgnore]
     [DefaultValue("")]
-    [HybridBindProperty(Source.Route, "uid")]
+    [CustomAttributeBinder]
     public string? SerialNo { get; set; }
 }

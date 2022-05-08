@@ -20,5 +20,8 @@ public class AddPeripheralValidation : BasePeripheralValidations<AddPeripheralCo
         ConfigureVendor();
         ConfigureFabricationDate();
         RuleFor(p => p.SerialNo).NotNull();
+        RuleFor(p => p.Uid).MustAsync(async (uid, cc)
+            => !await repository.ExistPeripheralAsync(uid, cc))
+            .WithMessage(I18n.PeripheralAlreadyExits);
     }
 }
