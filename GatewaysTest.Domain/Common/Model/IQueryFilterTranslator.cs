@@ -1,19 +1,13 @@
-﻿using System.Linq.Expressions;
+﻿namespace GatewaysTest.Domain.Common.Model;
 
-namespace GatewaysTest.Domain.Common.Model;
-
-public interface IQueryFilterTranslator<TDomainObject> : IQueryFilterTranslator where TDomainObject : PrimaryDomainEntity
+public interface IQueryFilterTranslator<TDomainObject, TKey> : IQueryFilterTranslator 
+    where TDomainObject : PrimaryDomainEntity<TKey>
 {
-    Expression<Func<TDomainObject, bool>>? GetFilter(string alias, object value, 
-        QueryFilterType type = QueryFilterType.Equals);
+    Task<IQueryable<TDomainObject>> AddFiltersAsync(IQueryable<TDomainObject> query, 
+        IEnumerable<QueryFilterValue> filters, CancellationToken cancellationToken);
 }
 
 public interface IQueryFilterTranslator
 {
     
-}
-
-public enum QueryFilterType : short
-{
-    Equals = 0
 }

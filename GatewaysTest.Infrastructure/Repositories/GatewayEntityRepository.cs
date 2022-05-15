@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GatewaysTest.Domain.Common.Model;
 using GatewaysTest.Domain.Model.Gateways;
 using GatewaysTest.Domain.Repositories;
 using GatewaysTest.Infrastructure.Persistence;
@@ -11,7 +12,11 @@ public class GatewayEntityRepository :
     IGatewayCommandRepository,
     IGatewayQueryRepository
 {
-    public GatewayEntityRepository(DomainContext context, IMapper mapper) : base(context, mapper)
+    public GatewayEntityRepository(
+        DomainContext context, 
+        IMapper mapper, 
+        IQueryFilterTranslator<GatewayObject, Guid>? filterTranslator = null) 
+        : base(context, mapper, filterTranslator)
     {
     }
 

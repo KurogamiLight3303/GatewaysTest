@@ -3,6 +3,5 @@
 public class QueryFilterValue
 {
     public string? Alias { get; set; }
-    public object? Value { get; set; }
-    public QueryFilterType Type { get; set; }
+    public string? Value { get; set; }
 }

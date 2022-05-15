@@ -12,13 +12,15 @@ public abstract class BaseEntityRepository<TDomainEntity, TKey> where TDomainEnt
     private readonly IMapper _mapper;
     protected readonly DbSet<TDomainEntity> DataSet;
     protected readonly DomainContext Context;
+    protected readonly IQueryFilterTranslator<TDomainEntity, TKey>? FilterTranslator;
 
     protected BaseEntityRepository(
         DomainContext context, 
-        IMapper mapper 
-        )
+        IMapper mapper, 
+        IQueryFilterTranslator<TDomainEntity, TKey>? filterTranslator = null)
     {
         _mapper = mapper;
+        FilterTranslator = filterTranslator;
         DataSet = context.Set<TDomainEntity>();
         Context = context;
     }
@@ -85,13 +87,8 @@ public abstract class BaseEntityRepository<TDomainEntity, TKey> where TDomainEnt
                 .AsNoTracking()
             ;
 
-        // if(parameters.Filters != null && FilterTranslator != null)
-        //     foreach (var filter in parameters.Filters)
-        //     {
-        //         var expression = FilterTranslator.GetFilter(filter.Alias, filter.Value, filter.Type);
-        //         if (expression != null)
-        //             query = query.Where(expression);
-        //     }
+        if (parameters.Filters != null && FilterTranslator != null)
+            query = await FilterTranslator.AddFiltersAsync(query, parameters.Filters, cancellationToken);
         
         return query;
     }
