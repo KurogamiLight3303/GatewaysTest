@@ -1,19 +1,12 @@
 # Gateways Test
-## Conditions
-You have to prepare a solution to the proposed problem in the defined period of time. The solution must
-comply with the requirements. For anything not explicitly listed, you are free to choose whatever
-technology/library/tool you feel comfortable with.
-Once ready, you must send a package with the source code of the solution, so it can be built and reviewed
-by Musala Soft. Instructions how to use the solution must also be provided (resource names, SQL scripts to
-import test data, other scripts, etc.).
-If you have completed the task after the deadline has expired, you are still encouraged to submit a solution.
-##Software Requirements
+
+## Software Requirements
 Programming languages: C#
 Framework: ASP.NET / ASP.NET Core
 Database: MSSQL or in-memory
 Automated build: Solution of choice
 UI: Angular
-##Description
+## Description
 This sample project is managing gateways - master devices that control multiple peripheral devices.
 Your task is to create a REST service (JSON/HTTP) for storing information about these gateways and
 their associated devices. This information must be stored in the database.
