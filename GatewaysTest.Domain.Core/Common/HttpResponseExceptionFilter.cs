@@ -4,16 +4,11 @@ using GatewaysTest.Domain.Common.Model;
 using GatewaysTest.Infrastructure.Extesions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 
 namespace GatewaysTest.Domain.Core.Common;
 
 public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
 {
-    public HttpResponseExceptionFilter()
-    {
-    }
-
     public int Order => int.MaxValue - 10;
 
     public void OnActionExecuting(ActionExecutingContext context) { }

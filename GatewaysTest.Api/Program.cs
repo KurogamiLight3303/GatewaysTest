@@ -2,9 +2,11 @@ using GatewaysTest.Domain.Core.Common;
 using GatewaysTest.Domain.Core.Common.CustomBinder;
 using GatewaysTest.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+// ReSharper disable AccessToModifiedClosure
 
 var builder = WebApplication.CreateBuilder(args);
 
+WebApplication? app = null;
 // Add services to the container.
 
 builder
@@ -12,8 +14,9 @@ builder
     .AddControllers(options =>
     {
         options.Filters.Add<HttpResponseExceptionFilter>();
-        IHttpRequestStreamReaderFactory readerFactory = 
-            builder.Services.BuildServiceProvider().GetRequiredService<IHttpRequestStreamReaderFactory>();
+        IHttpRequestStreamReaderFactory? readerFactory;
+        if (app == null || (readerFactory = app.Services.GetService<IHttpRequestStreamReaderFactory>()) == null) 
+            throw new($"Unable to Bind {nameof(CustomModelBinderProvider)}");
         options.ModelBinderProviders.Insert(0, new CustomModelBinderProvider(options.InputFormatters, readerFactory));
     })
     .ConfigureApiBehaviorOptions(options =>
@@ -38,7 +41,7 @@ builder.Services.AddSwaggerGen(c =>
 // Add AWS Lambda support.
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
-var app = builder.Build();
+app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
