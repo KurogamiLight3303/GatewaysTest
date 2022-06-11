@@ -10,12 +10,14 @@ public class AggregateBaseEntityRepository<TDomainEntity, TChildDomainEntity, TK
     where TDomainEntity : AggregateDomainEntity<TKey, TChildKey, TChildDomainEntity>
     where TChildDomainEntity : SecondaryDomainEntity<TChildKey, TKey>
 {
-    public AggregateBaseEntityRepository(
+    protected readonly DbSet<TChildDomainEntity> ChildDataSet;
+    protected AggregateBaseEntityRepository(
         DomainContext context, 
         IMapper mapper, 
         IQueryFilterTranslator<TDomainEntity, TKey>? filterTranslator = null) 
         : base(context, mapper, filterTranslator)
     {
+        ChildDataSet = context.Set<TChildDomainEntity>();
     }
 
     public override void Update(TDomainEntity entity)

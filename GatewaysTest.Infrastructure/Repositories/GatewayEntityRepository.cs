@@ -21,5 +21,5 @@ public class GatewayEntityRepository :
     }
 
     public Task<bool> ExistPeripheralAsync(int uid, CancellationToken cancellationToken = default) 
-        => Context.Peripherals.Where(p => p.UID == uid).AnyAsync(cancellationToken);
+        => ChildDataSet.AnyAsync(p => p.UID == uid, cancellationToken);
 }
