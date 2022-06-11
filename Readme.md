@@ -27,14 +27,6 @@ remove a device from a gateway.
 * date created,
 * status - online/offline.
 
-## Other considerations
-Please, provide
-- Basic UI - recommended or (providing test data for Postman (or other rest client) if you do not have
-  enough time.
-- Meaningful Unit tests.
-- Readme file with installation guides.
-- An automated build.
-
 # Installation
 ## Database Configuration
 Set the database configuration in the `appsettings.json` file at the `DomainConnectionString` key. The Database provider used is MSSQL Server.
